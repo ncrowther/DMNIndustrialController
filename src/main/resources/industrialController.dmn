@@ -102,7 +102,7 @@
     <dmn:informationRequirement id="_C76D133A-E743-4F5B-86BC-49FB0A9C91EC">
       <dmn:requiredInput href="#_68DE78D5-B3A2-48A8-88BF-01B71AF0E488" />
     </dmn:informationRequirement>
-    <dmn:decisionTable id="_5834EA30-BD08-40E3-95D3-EE47250628A9" typeRef="boolean" hitPolicy="UNIQUE" label="Heater">
+    <dmn:decisionTable id="_5834EA30-BD08-40E3-95D3-EE47250628A9" typeRef="boolean" hitPolicy="FIRST" label="Heater">
       <dmn:input id="_7074C63D-3693-4CFC-9C84-86BB96607760">
         <dmn:inputExpression id="_CDD5E184-DDE8-4AD4-B929-0C3ECDD6A42E" typeRef="number">
           <dmn:text>temperature</dmn:text>
@@ -132,6 +132,17 @@
           <dmn:text>// Heater OFF</dmn:text>
         </dmn:annotationEntry>
       </dmn:rule>
+      <dmn:rule id="_C7CC2910-811C-4265-97F0-BF8871B7AEE8">
+        <dmn:inputEntry id="_96A92D12-2966-4EA6-B268-85A11B0B0D41">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_02D9E158-AB46-4A2B-9EBE-2510D9F45D35">
+          <dmn:text>null</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>// Do Nothing</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
     </dmn:decisionTable>
   </dmn:decision>
   <dmn:decision name="Fan" id="_C6F990AE-47FB-4003-8BD2-3278ADA4A4A2">
@@ -139,7 +150,7 @@
     <dmn:informationRequirement id="_0432F0D1-5DDC-48C8-89DB-1D8D116508CB">
       <dmn:requiredInput href="#_68DE78D5-B3A2-48A8-88BF-01B71AF0E488" />
     </dmn:informationRequirement>
-    <dmn:decisionTable id="_CE15C595-F890-4EE4-B821-ED7FD3F494FE" typeRef="boolean" hitPolicy="UNIQUE" label="Fan">
+    <dmn:decisionTable id="_CE15C595-F890-4EE4-B821-ED7FD3F494FE" typeRef="boolean" hitPolicy="FIRST" label="Fan">
       <dmn:input id="_79CEFE39-6557-44E0-9619-9CEB730E460E">
         <dmn:inputExpression id="_C47C931D-DEA9-4763-89C3-AF300E70251D" typeRef="number">
           <dmn:text>temperature</dmn:text>
@@ -167,6 +178,17 @@
         </dmn:outputEntry>
         <dmn:annotationEntry>
           <dmn:text>// Fan OFF</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_2D2776C4-FEA0-4C0C-8384-19F0C7D0B25C">
+        <dmn:inputEntry id="_BFEEE1BC-67B0-4572-B410-CCE34EDFF921">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_479385BB-AD88-48BC-BD47-E63223BF89ED">
+          <dmn:text>null</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>// Do nothing</dmn:text>
         </dmn:annotationEntry>
       </dmn:rule>
     </dmn:decisionTable>
