@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_59A05DC0-D5A9-4147-AF08-3A1CD0A892DD" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_5DEDDCD8-4C13-4078-AFB7-B6F8F4580FD8" name="industrialController" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_59A05DC0-D5A9-4147-AF08-3A1CD0A892DD">
+  <dmn:extensionElements/>
+  <dmn:inputData id="_ECB3C66B-A038-41D4-A75B-966F3A7C7602" name="temperature">
+    <dmn:extensionElements/>
+    <dmn:variable id="_49E21E8F-F5D0-4C94-B4CC-1B65C6D96D0F" name="temperature" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:inputData id="_DBBFC5DE-1EAC-44D5-A7BD-6B966C6E0BD1" name="humidity">
+    <dmn:extensionElements/>
+    <dmn:variable id="_FA971443-6360-436D-B3B5-46ECB49850B0" name="humidity" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:inputData id="_E68E0FDA-E452-4ED5-90F9-FBA7DD2FF39A" name="hour">
+    <dmn:extensionElements/>
+    <dmn:variable id="_4C2F9370-EE98-403C-85CC-7443A95E8CCD" name="hour" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:decision id="_AAB43499-4643-40F5-9053-09F3E78BA106" name="Heater">
+    <dmn:extensionElements/>
+    <dmn:variable id="_F5028337-F278-40A6-A5A6-093FFBBAA326" name="Heater" typeRef="boolean"/>
+    <dmn:informationRequirement id="_7DD971B2-901D-4EFF-8409-13E2E9E87E93">
+      <dmn:requiredInput href="#_ECB3C66B-A038-41D4-A75B-966F3A7C7602"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_C1A4C365-5D7C-428B-AE27-8D3F19E0BC30" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_79B1F57C-EF3C-453A-A839-EDF20992BE24">
+        <dmn:inputExpression id="_1B100747-25CD-4959-8DB2-FF7282DA17A7" typeRef="number">
+          <dmn:text>temperature</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_197A4E31-FBF0-4E7B-AD0F-8BA264E55378"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_EF643250-BA88-4731-B71D-D6C52CA9CDCE">
+        <dmn:inputEntry id="_A3C8903D-BFE4-42D6-9D53-D3D63E052B4B">
+          <dmn:text>&lt;= 18</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_E0B86CDA-A2BE-4028-94D4-EFDF624E27A6">
+          <dmn:text>true</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>// Heater On</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_1DB88AF7-7608-43DC-83A8-C01DF905184F">
+        <dmn:inputEntry id="_A27566B6-AEE1-4F37-804A-F7AB9F395726">
+          <dmn:text>&gt;= 19</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_2498DF5D-50AE-4E9F-806C-43F198ED21D0">
+          <dmn:text>false</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>// Heater Off</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_17003C5A-6B6C-41A5-8E03-B994E7D336AA" name="Fan">
+    <dmn:extensionElements/>
+    <dmn:variable id="_6618401D-5045-4823-83AF-3283D42EC9DB" name="Fan" typeRef="boolean"/>
+    <dmn:informationRequirement id="_4671F58C-D6AD-42DF-BA16-19E63A249950">
+      <dmn:requiredInput href="#_ECB3C66B-A038-41D4-A75B-966F3A7C7602"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_0DEA1B57-1278-4229-9097-01F099AC3110" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_DC32D214-90AC-4843-B71B-F3FD7F55B151">
+        <dmn:inputExpression id="_171F9717-8AEE-403D-BF66-6B0F9A4A946B" typeRef="number">
+          <dmn:text>temperature</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_C9C4EA82-C571-440D-B718-B59C2BA0888F"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_4EF590BE-6E73-4286-B165-6B763DEC5F27">
+        <dmn:inputEntry id="_3B74ACDD-06F1-4870-B88A-C842F39AF743">
+          <dmn:text>&gt; 25</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_37407137-A770-4907-B915-99B7913D92E2">
+          <dmn:text>true</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>// Fan ON</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_59E0053D-6666-4736-8557-2105F1A5087E">
+        <dmn:inputEntry id="_54067CD3-38AE-46D1-A3F2-9FD947FE9200">
+          <dmn:text>&lt; 22</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_5FCE31BE-D24C-4559-AA8A-A23677E2C322">
+          <dmn:text>false</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>// Fan OFF</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_905B4EED-3C8C-4DBB-8861-B0C73F1B63AE" name="Humidifier">
+    <dmn:extensionElements/>
+    <dmn:variable id="_D7BFE0F1-77A0-4CDA-896F-BB212FBFD53B" name="Humidifier"/>
+    <dmn:informationRequirement id="_434F08CC-C275-4384-B8B3-09F626A18814">
+      <dmn:requiredDecision href="#_5CFEF02F-B187-4C19-903B-BDB4139E6D96"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_CDBB2674-B94D-487D-AF8D-151F20692E46" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_394E9E88-FC90-4361-9226-D06C9CF8B91A">
+        <dmn:inputExpression id="_00587E55-1914-4010-984D-C1A995CBECC0" typeRef="number">
+          <dmn:text>Vpd</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_EF1F3C39-E644-445A-ADE2-A5377A505DC5"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_F3F3AD70-B7F6-4280-87C1-18DF3FAE0BEB">
+        <dmn:inputEntry id="_A3D14727-BADF-4BE4-AF46-1263D530F68A">
+          <dmn:text>&lt; 0.5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_D0B632BC-6393-4A43-A617-57F67A1C6B0E">
+          <dmn:text>"DEHUMIDIFY"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>// Too humid</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_25EC8FA1-A985-4A25-9E9A-D95D0229904D">
+        <dmn:inputEntry id="_2BA6627D-3427-4DD3-9D3C-87F23A0E78C9">
+          <dmn:text>&gt; 1.2</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_BC3DD940-AB36-41D0-AA51-16ED7E1E75F4">
+          <dmn:text>"HUMIDIFY"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>// Too dry</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_891E1628-1D8E-47B9-9BC6-F9D24BBD2369">
+        <dmn:inputEntry id="_44BE7108-70A7-4F9B-8141-351FB6924F6C">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_D59E0C38-BFF7-49CC-9D0C-16620BD2491C">
+          <dmn:text>"OPTIMAL"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>// Just right</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_5362CCFC-BF97-4AA0-B156-5659A1689EDD" name="Light">
+    <dmn:extensionElements/>
+    <dmn:variable id="_1DACA00F-E97B-44ED-8935-45BD36449F91" name="Light" typeRef="boolean"/>
+    <dmn:informationRequirement id="_C118F357-2541-4B65-B4E7-69AF70450AE4">
+      <dmn:requiredInput href="#_E68E0FDA-E452-4ED5-90F9-FBA7DD2FF39A"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_6D8ECA60-A6EB-48F3-9D38-0DB7A7D9D580" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_5E0C4EB1-20F6-4C8D-A077-4AA00F796FCD">
+        <dmn:inputExpression id="_CE52FD5E-ADB2-4B00-BF0C-AB344258063D" typeRef="number">
+          <dmn:text>hour</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_4FF7F55E-B7CA-404D-8F82-5D42E6BFB8E1"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_C585DCD1-48BA-4D80-AD8B-FA155C32D411">
+        <dmn:inputEntry id="_619E606E-DAFD-4A40-93FF-F64F32AC5EA9">
+          <dmn:text>[9 .. 19]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_9CC87D97-94B5-451F-901D-42E9A9926DA3">
+          <dmn:text>true</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>// Light ON</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_E2C39269-5198-43A9-83E1-A39537E827E5">
+        <dmn:inputEntry id="_5E5FAE3F-C156-42E0-8560-AEC04431D2D7">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_9B33CE98-C890-42D8-A731-9F0F8949AB76">
+          <dmn:text>false</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>// Light Off</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_5CFEF02F-B187-4C19-903B-BDB4139E6D96" name="Vpd">
+    <dmn:extensionElements/>
+    <dmn:variable id="_E28FC42E-0287-497E-A98C-6363148455BE" name="Vpd" typeRef="number"/>
+    <dmn:informationRequirement id="_3883D89B-44C0-4614-8E9D-CC67D99FDBB1">
+      <dmn:requiredInput href="#_DBBFC5DE-1EAC-44D5-A7BD-6B966C6E0BD1"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_3BEC5BF3-C2C2-40C7-BCF5-BEA082BDEA9F">
+      <dmn:requiredInput href="#_ECB3C66B-A038-41D4-A75B-966F3A7C7602"/>
+    </dmn:informationRequirement>
+    <dmn:context id="_BBC3E22D-3786-411C-9B82-2664819ACE7A">
+      <dmn:contextEntry>
+        <dmn:variable id="_9F028D58-3457-4914-8A57-D025D4F80333" name="leafTemperature" typeRef="number"/>
+        <dmn:literalExpression id="_835B0557-5501-44AD-8273-99C846E1C02B">
+          <dmn:text>temperature - 1</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_9D3FA3B6-CECA-4CFE-99AA-934AC1FC26F1" name="leafVp" typeRef="number"/>
+        <dmn:literalExpression id="_3C766CD8-6090-4CE9-BC06-EFAD5F47D150">
+          <dmn:text>0.61078 * exp(17.27 * leafTemperature / (leafTemperature + 237.3))</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_A91ABCBC-B4C7-4C1F-B60C-9D5796D16DC7" name="airVp" typeRef="number"/>
+        <dmn:literalExpression id="_C9E089D6-E13F-44A6-A32C-040A71142204">
+          <dmn:text>0.61078 * exp(17.27 * temperature / (temperature + 237.3)) * (humidity / 100)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_960E1D96-19F4-4B9E-B4DC-AD5EF2BB448A">
+          <dmn:text>leafVp - airVp</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_B3039E13-54F5-463F-910F-ECDE393EAE0B" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_C1A4C365-5D7C-428B-AE27-8D3F19E0BC30">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>289</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0DEA1B57-1278-4229-9097-01F099AC3110">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CDBB2674-B94D-487D-AF8D-151F20692E46">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>118</kie:width>
+            <kie:width>337</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6D8ECA60-A6EB-48F3-9D38-0DB7A7D9D580">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>296</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BBC3E22D-3786-411C-9B82-2664819ACE7A">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>678</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_835B0557-5501-44AD-8273-99C846E1C02B">
+            <kie:width>678</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3C766CD8-6090-4CE9-BC06-EFAD5F47D150">
+            <kie:width>678</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C9E089D6-E13F-44A6-A32C-040A71142204">
+            <kie:width>678</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_960E1D96-19F4-4B9E-B4DC-AD5EF2BB448A">
+            <kie:width>678</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_ECB3C66B-A038-41D4-A75B-966F3A7C7602" dmnElementRef="_ECB3C66B-A038-41D4-A75B-966F3A7C7602" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="290.5981308411215" y="598" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_DBBFC5DE-1EAC-44D5-A7BD-6B966C6E0BD1" dmnElementRef="_DBBFC5DE-1EAC-44D5-A7BD-6B966C6E0BD1" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="495.29906542056074" y="593" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_E68E0FDA-E452-4ED5-90F9-FBA7DD2FF39A" dmnElementRef="_E68E0FDA-E452-4ED5-90F9-FBA7DD2FF39A" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="705" y="593" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_AAB43499-4643-40F5-9053-09F3E78BA106" dmnElementRef="_AAB43499-4643-40F5-9053-09F3E78BA106" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="292" y="389" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_17003C5A-6B6C-41A5-8E03-B994E7D336AA" dmnElementRef="_17003C5A-6B6C-41A5-8E03-B994E7D336AA" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="127" y="389" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_905B4EED-3C8C-4DBB-8861-B0C73F1B63AE" dmnElementRef="_905B4EED-3C8C-4DBB-8861-B0C73F1B63AE" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="494" y="389" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_5362CCFC-BF97-4AA0-B156-5659A1689EDD" dmnElementRef="_5362CCFC-BF97-4AA0-B156-5659A1689EDD" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="698" y="389" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_5CFEF02F-B187-4C19-903B-BDB4139E6D96" dmnElementRef="_5CFEF02F-B187-4C19-903B-BDB4139E6D96" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="495" y="484" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_7DD971B2-901D-4EFF-8409-13E2E9E87E93" dmnElementRef="_7DD971B2-901D-4EFF-8409-13E2E9E87E93">
+        <di:waypoint x="340.5981308411215" y="623"/>
+        <di:waypoint x="342" y="439"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_4671F58C-D6AD-42DF-BA16-19E63A249950-AUTO-TARGET" dmnElementRef="_4671F58C-D6AD-42DF-BA16-19E63A249950">
+        <di:waypoint x="340.5981308411215" y="623"/>
+        <di:waypoint x="177" y="439"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_434F08CC-C275-4384-B8B3-09F626A18814" dmnElementRef="_434F08CC-C275-4384-B8B3-09F626A18814">
+        <di:waypoint x="545" y="509"/>
+        <di:waypoint x="544" y="439"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_C118F357-2541-4B65-B4E7-69AF70450AE4" dmnElementRef="_C118F357-2541-4B65-B4E7-69AF70450AE4">
+        <di:waypoint x="755" y="618"/>
+        <di:waypoint x="748" y="439"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_3883D89B-44C0-4614-8E9D-CC67D99FDBB1" dmnElementRef="_3883D89B-44C0-4614-8E9D-CC67D99FDBB1">
+        <di:waypoint x="545.2990654205607" y="618"/>
+        <di:waypoint x="545" y="534"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_3BEC5BF3-C2C2-40C7-BCF5-BEA082BDEA9F" dmnElementRef="_3BEC5BF3-C2C2-40C7-BCF5-BEA082BDEA9F">
+        <di:waypoint x="340.5981308411215" y="623"/>
+        <di:waypoint x="545" y="534"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
